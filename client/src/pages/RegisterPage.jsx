@@ -30,7 +30,7 @@ const RegisterPage = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="max-w-md w-full p-6 bg-white rounded-lg shadow-lg">
+      <div className="max-w-md w-full p-6 bg-white rounded-lg shadow-md border border-gray-200">
         <h2 className="text-2xl font-bold mb-6 text-center">Join GigFlow</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -66,13 +66,13 @@ const RegisterPage = () => {
           <button 
             type="submit" 
             disabled={loading}
-            className="w-full bg-primary text-white py-2 px-4 rounded hover:bg-blue-600 disabled:opacity-50"
+            className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 disabled:opacity-50"
           >
             {loading ? 'Creating Account...' : 'Register'}
           </button>
         </form>
         <div className="mt-4 text-center">
-            <p>Already have an account? <Link to="/login" className="text-primary">Login</Link></p>
+            <p>Already have an account? <Link to="/login" className="text-blue-600 hover:text-blue-800">Login</Link></p>
         </div>
       </div>
     </div>

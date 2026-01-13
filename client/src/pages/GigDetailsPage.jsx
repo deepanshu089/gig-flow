@@ -80,7 +80,7 @@ const GigDetailsPage = () => {
 
             {/* Bid Form */}
             {!isOwner && gig.status === 'open' && (
-                <div className="mt-8 bg-white shadow sm:rounded-lg p-6">
+                <div className="mt-8 bg-white border border-gray-200 rounded p-6 shadow-sm">
                     <h3 className="text-lg font-medium text-gray-900 mb-4">Place a Bid</h3>
                     <form onSubmit={handleBid} className="space-y-4">
                         <div>
@@ -88,7 +88,7 @@ const GigDetailsPage = () => {
                             <textarea
                                 value={message} onChange={e => setMessage(e.target.value)}
                                 rows={4}
-                                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500"
                                 placeholder="Why are you the best fit for this job?"
                                 required
                             />
@@ -98,12 +98,12 @@ const GigDetailsPage = () => {
                             <input
                                 type="number"
                                 value={price} onChange={e => setPrice(e.target.value)}
-                                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500"
                                 placeholder="Offer amount"
                                 required
                             />
                         </div>
-                        <button type="submit" className="w-full bg-primary text-white py-2 px-4 rounded hover:bg-blue-600">
+                        <button type="submit" className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">
                             Submit Proposal
                         </button>
                     </form>

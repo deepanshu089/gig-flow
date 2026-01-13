@@ -87,7 +87,7 @@ const DashboardPage = () => {
            {myGigs.length === 0 && <p className="text-gray-500 italic">You haven't posted any jobs yet.</p>}
            {!selectedGigId ? (
                myGigs.map(gig => (
-                   <div key={gig._id} className="bg-white shadow rounded-lg p-6 border border-gray-100 hover:shadow-md transition-shadow">
+                   <div key={gig._id} className="bg-white border border-gray-200 rounded shadow-sm p-6 hover:shadow-md">
                        <div className="flex justify-between items-start">
                            <div>
                                <h3 className="text-lg font-medium text-gray-900">{gig.title}</h3>
@@ -101,7 +101,7 @@ const DashboardPage = () => {
                        <div className="mt-4 flex space-x-4">
                            <button 
                                 onClick={() => handleViewBids(gig._id)}
-                                className="text-primary hover:text-blue-800 text-sm font-medium"
+                                className="text-blue-600 hover:text-blue-800 text-sm font-medium"
                            >
                                View Bids
                            </button>
@@ -111,10 +111,10 @@ const DashboardPage = () => {
            ) : (
                <div>
                    <button onClick={() => setSelectedGigId(null)} className="mb-4 text-sm text-gray-500 hover:text-gray-700 flex items-center">&larr; Back to jobs</button>
-                   <h2 className="text-xl font-bold mb-4">Bids for <span className="text-primary">{myGigs.find(g => g._id === selectedGigId)?.title}</span></h2>
+                   <h2 className="text-xl font-bold mb-4">Bids for <span className="text-gray-900">{myGigs.find(g => g._id === selectedGigId)?.title}</span></h2>
                    <div className="space-y-4">
                        {gigBids.length === 0 ? <p className="text-gray-500 italic">No bids yet.</p> : gigBids.map(bid => (
-                           <div key={bid._id} className="bg-white border rounded-lg p-4 flex justify-between items-center shadow-sm">
+                           <div key={bid._id} className="bg-white border border-gray-200 rounded p-4 flex justify-between items-center shadow-sm">
                                <div>
                                    <p className="font-medium text-gray-900">{bid.freelancerId.name} <span className="text-xs text-gray-400">({bid.freelancerId.email})</span></p>
                                    <p className="text-sm text-gray-500 italic">"{bid.message}"</p>
@@ -124,7 +124,7 @@ const DashboardPage = () => {
                                    {bid.status === 'pending' && myGigs.find(g => g._id === selectedGigId)?.status === 'open' && (
                                        <button 
                                             onClick={() => handleHire(bid._id)}
-                                            className="bg-green-600 text-white px-4 py-2 rounded text-sm hover:bg-green-700 shadow transition-all transform hover:scale-105"
+                                            className="bg-green-600 text-white px-4 py-2 rounded text-sm hover:bg-green-700"
                                        >
                                            HIRE
                                        </button>
@@ -147,7 +147,7 @@ const DashboardPage = () => {
           <div className="space-y-6">
               {myBids.length === 0 && <p className="text-gray-500 italic">You haven't placed any bids yet.</p>}
               {myBids.map(bid => (
-                  <div key={bid._id} className="bg-white shadow rounded-lg p-6 border border-gray-100">
+                  <div key={bid._id} className="bg-white border border-gray-200 rounded shadow-sm p-6">
                       <div className="flex justify-between">
                         <h3 className="text-lg font-medium text-gray-900">Project: {bid.gigId?.title || 'Unknown Project'}</h3>
                          <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full uppercase ${bid.status === 'hired' ? 'bg-green-100 text-green-800' : bid.status === 'rejected' ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800'}`}>
