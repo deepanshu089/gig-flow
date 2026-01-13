@@ -36,9 +36,3 @@ A mini-freelance marketplace platform.
 2. `npm install`
 3. `npm run dev` (Runs on port 5173)
 
-## Notes
-- Ensure MongoDB is running locally on port 27017.
-- For "Transaction Integrity" (Hiring), MongoDB must be running as a Replica Set. If running standalone, the transaction logic in `bidController.js` will fail. 
-
-## License
-MIT
