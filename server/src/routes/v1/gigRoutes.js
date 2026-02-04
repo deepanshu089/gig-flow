@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { getGigs, createGig, getMyGigs, getGigById, updateGig, deleteGig } = require('../controllers/gigController');
-const { protect } = require('../middleware/authMiddleware');
-const { validate, gigSchema, gigUpdateSchema } = require('../middleware/validation');
+const { getGigs, createGig, getMyGigs, getGigById, updateGig, deleteGig } = require('../../controllers/gigController');
+const { protect } = require('../../middleware/authMiddleware');
+const { validate, gigSchema, gigUpdateSchema } = require('../../middleware/validation');
 
 /**
  * @swagger
