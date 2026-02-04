@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { register, clearError } from '../store/slices/authSlice';
 import { useNavigate, Link } from 'react-router-dom';
-import toast from 'react-hot-toast';
+import ErrorMessage from '../components/ErrorMessage';
 
 const RegisterPage = () => {
   const [name, setName] = useState('');
@@ -14,14 +14,10 @@ const RegisterPage = () => {
   const { user, loading, error } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (error) {
-      toast.error(error);
-      dispatch(clearError());
-    }
     if (user) {
       navigate('/dashboard');
     }
-  }, [error, user, navigate, dispatch]);
+  }, [user, navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,51 +25,79 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="max-w-md w-full p-6 bg-white rounded-lg shadow-md border border-gray-200">
-        <h2 className="text-2xl font-bold mb-6 text-center">Join GigFlow</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-             <label className="block text-sm font-medium text-gray-700">Name</label>
-             <input 
-              type="text" 
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Email</label>
-            <input 
-              type="email" 
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Password</label>
-            <input 
-              type="password" 
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
-              required
-            />
-          </div>
-          <button 
-            type="submit" 
-            disabled={loading}
-            className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 disabled:opacity-50"
-          >
-            {loading ? 'Creating Account...' : 'Register'}
-          </button>
-        </form>
-        <div className="mt-4 text-center">
-            <p>Already have an account? <Link to="/login" className="text-blue-600 hover:text-blue-800">Login</Link></p>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-8">
+        <div>
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            Create your account
+          </h2>
+          <p className="mt-2 text-center text-sm text-gray-600">
+            Or{' '}
+            <Link to="/login" className="font-medium text-indigo-600 hover:text-indigo-500">
+              sign in to your existing account
+            </Link>
+          </p>
         </div>
+
+        <ErrorMessage error={error} onClose={() => dispatch(clearError())} />
+
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+          <div className="rounded-md shadow-sm space-y-3">
+            <div>
+              <label htmlFor="name" className="sr-only">Full name</label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                autoComplete="name"
+                required
+                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="Full name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="email" className="sr-only">Email address</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                required
+                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="Email address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="password" className="sr-only">Password</label>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                autoComplete="new-password"
+                required
+                minLength={6}
+                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="Password (min 6 characters)"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div>
+            <button
+              type="submit"
+              disabled={loading}
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              {loading ? 'Creating account...' : 'Create account'}
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );
